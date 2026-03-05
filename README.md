@@ -1,1 +1,4 @@
-# dot
+# dotfiles
+
+## REQUIREMENTS
+- wezterm nightly
