@@ -1,7 +1,38 @@
 local wezterm = require("wezterm")
+local colors = require("colors")
 local utils = require("utils")
 
 local act = wezterm.action
+
+wezterm.on("switch_theme", function(window, pane)
+  local choices = {}
+
+  for _, v in ipairs(wezterm.glob(wezterm.config_dir .. "/colors/*.lua")) do
+    local file_name = utils.format.basename(v)
+    file_name = file_name:sub(1, #file_name - 4) -- remove ".lua" from the file_name
+    if file_name ~= "init" then
+      table.insert(choices, { label = file_name })
+    end
+  end
+
+  table.sort(choices, function(a, b)
+    return a.label < b.label
+  end)
+
+  window:perform_action(
+    wezterm.action.InputSelector({
+      title = "Select color scheme",
+      choices = choices,
+      fuzzy = true,
+      action = wezterm.action_callback(function(win, pane, id, label)
+        if label then
+          colors.switch_theme(label)
+        end
+      end),
+    }),
+    pane
+  )
+end)
 
 -- you must disable the default keybindings to enable this custom event
 wezterm.on("toggle_zen_mode", function(window, pane)
@@ -105,6 +136,7 @@ config.keys = {
   { key = "c", mods = "SHIFT|CTRL", action = act.CopyTo("Clipboard") },
   { key = "v", mods = "SHIFT|CTRL", action = act.PasteFrom("Clipboard") },
   -- misc
+  { key = "t", mods = "LEADER", action = act.EmitEvent("switch_theme")},
   { key = "Enter", mods = "CTRL", action = act.ToggleFullScreen },
   { key = "l", mods = "CTRL", action = act.ClearScrollback("ScrollbackAndViewport") },
   { key = "p", mods = "CTRL", action = act.ActivateCommandPalette },

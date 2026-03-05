@@ -5,6 +5,14 @@ local theme_file = wezterm.config_dir .. "/theme"
 
 local M = {}
 
+function M.switch_theme(new_color_scheme)
+  local file = io.open(theme_file, "w")
+  if file then
+    file:write(new_color_scheme)
+    file:close()
+  end
+end
+
 function M.get_appearance()
   if wezterm.gui then
     local appearance = wezterm.gui.get_appearance()
