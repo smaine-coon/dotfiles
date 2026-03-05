@@ -13,7 +13,7 @@ end
 
 for _, v in ipairs(wezterm.glob(wezterm.config_dir .. "/config/*.lua")) do
   local file_name = utils.format.basename(v)
-  merge_config(file_name:sub(0, #file_name - 4)) -- remove ".lua" from the file_name
+  merge_config(file_name:sub(1, #file_name - 4)) -- remove ".lua" from the file_name
 end
 
 return config
