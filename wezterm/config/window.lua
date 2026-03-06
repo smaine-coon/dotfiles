@@ -21,7 +21,7 @@ wezterm.on("gui-startup", function(cmd)
   poll_bg(window)
 end)
 
-wezterm.on('format-window-title', function(tab)
+wezterm.on("format-window-title", function(tab)
   return utils.format.basename(tab.active_pane.foreground_process_name)
 end)
 

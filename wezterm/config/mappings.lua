@@ -36,7 +36,7 @@ end)
 
 -- you must disable the default keybindings to enable this custom event
 wezterm.on("toggle_zen_mode", function(window, pane)
-  local zen_key = 'ZEN' .. tostring(window:window_id())
+  local zen_key = "ZEN" .. tostring(window:window_id())
   local current = utils.cache.global_cache:get(zen_key) or false
   utils.cache.global_cache:set(zen_key, not current)
 
@@ -59,7 +59,7 @@ end)
 
 local config = {}
 
-config.leader = { key = '.', mods = 'CTRL', timeout_milliseconds = 1500 }
+config.leader = { key = ".", mods = "CTRL", timeout_milliseconds = 1500 }
 
 config.keys = {
   -- workspace
@@ -196,28 +196,28 @@ config.key_tables = {
 
 config.mouse_bindings = {
   {
-    event = { Down = { streak = 1, button = 'Left' } },
-    mods = 'NONE',
+    event = { Down = { streak = 1, button = "Left" } },
+    mods = "NONE",
     action = act.SelectTextAtMouseCursor("Cell"),
   },
   {
-    event = { Down = { streak = 2, button = 'Left' } },
-    mods = 'NONE',
+    event = { Down = { streak = 2, button = "Left" } },
+    mods = "NONE",
     action = act.SelectTextAtMouseCursor("Word"),
   },
   {
-    event = { Down = { streak = 3, button = 'Left' } },
-    mods = 'NONE',
+    event = { Down = { streak = 3, button = "Left" } },
+    mods = "NONE",
     action = act.SelectTextAtMouseCursor("Line"),
   },
   {
-    event = { Drag = { streak = 1, button = 'Left' } },
-    mods = 'NONE',
+    event = { Drag = { streak = 1, button = "Left" } },
+    mods = "NONE",
     action = act.ExtendSelectionToMouseCursor("Cell"),
   },
   {
-    event = { Down = { streak = 1, button = 'Right' } },
-    mods = 'NONE',
+    event = { Down = { streak = 1, button = "Right" } },
+    mods = "NONE",
     action = act.PasteFrom("PrimarySelection"),
   },
 }

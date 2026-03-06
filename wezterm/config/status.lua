@@ -28,28 +28,28 @@ local function add_element(elems, icon, text)
 
   table.insert(elems, { Background = { Color = bg } })
   table.insert(elems, { Foreground = { Color = fg } })
-  table.insert(elems, { Text = ' ' .. icon .. '  ' .. text .. ' ' })
+  table.insert(elems, { Text = " " .. icon .. "  " .. text .. " " })
 end
 
 local function get_battery(elems, window)
   for _, b in ipairs(wezterm.battery_info()) do
-    add_element(elems, BATTERY, string.format('%.0f%%', b.state_of_charge * 100))
+    add_element(elems, BATTERY, string.format("%.0f%%", b.state_of_charge * 100))
   end
 end
 
 local function get_date_and_time(elems)
-  add_element(elems, CALENDAR, wezterm.strftime('%b %-d %H:%M'))
+  add_element(elems, CALENDAR, wezterm.strftime("%b %-d %H:%M"))
 end
 
-wezterm.on('update-status', function(window, pane)
-  local zen_key = 'ZEN' .. tostring(window:window_id())
+wezterm.on("update-status", function(window, pane)
+  local zen_key = "ZEN" .. tostring(window:window_id())
   local is_zen = utils.cache.global_cache:get(zen_key)
 
   local elements = {}
 
   add_decoration(elements, LEFT_DECORATION)
-  add_element(elements, window:leader_is_active() and LEADER or KEYBOARD, window:active_key_table()  or '  ? ')
-  add_element(elements, is_zen and ON or OFF, '')
+  add_element(elements, window:leader_is_active() and LEADER or KEYBOARD, window:active_key_table()  or "  ? ")
+  add_element(elements, is_zen and ON or OFF, "")
   get_date_and_time(elements)
   get_battery(elements, window)
   add_decoration(elements, RIGHT_DECORATION)
