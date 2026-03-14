@@ -220,6 +220,21 @@ config.mouse_bindings = {
     mods = "NONE",
     action = act.PasteFrom("PrimarySelection"),
   },
+  {
+    event = { Down = { streak = 1, button = { WheelUp = 1 } } },
+    mods = "NONE",
+    action = act.ScrollByPage(-0.1),
+  },
+  {
+    event = { Down = { streak = 1, button = { WheelDown = 1 } } },
+    mods = "NONE",
+    action = act.ScrollByPage(0.1),
+  },
+  {
+    event = { Drag = { streak = 1, button = "Left" } },
+    mods = "SHIFT|CTRL",
+    action = act.StartWindowDrag,
+  },
 }
 
 return config
